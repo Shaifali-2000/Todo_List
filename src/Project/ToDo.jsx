@@ -26,6 +26,16 @@ export const ToDo = () => {
 
 		setInputValue("");
 	};
+	//TODO HANDLEDELETE FUNCTION
+	const handleDelete = (value) => {
+		console.log(task);
+		console.log(value);
+		const updatedElm = task.filter((CurlElm) => CurlElm != value);
+		setTask(updatedElm);
+	};
+	const HandleClear = () => {
+		setTask([]);
+	};
 	return (
 		<>
 			<section className="Todo-container">
@@ -58,13 +68,19 @@ export const ToDo = () => {
 									<button>
 										<MdCheck />
 									</button>
-									<button>
+									<button
+										className="delete-btn"
+										onClick={() => handleDelete(CurlElm)}
+									>
 										<MdDeleteForever />
 									</button>
 								</li>
 							);
 						})}
 					</ul>
+				</section>
+				<section>
+					<button onClick={HandleClear}>Clear All</button>
 				</section>
 			</section>
 		</>

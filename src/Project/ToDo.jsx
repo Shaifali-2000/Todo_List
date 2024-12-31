@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { MdCheck } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
+
 export const ToDo = () => {
 	const [inputValue, setInputValue] = useState("");
 	const [task, setTask] = useState([]);
+	const [dateTime, setDateTime] = useState("");
+	setInterval(() => {
+		const now = new Date();
+		const formattingDate = now.toLocaleDateString();
+		const formattingTime = now.toLocaleTimeString();
+		setDateTime(`${formattingDate}-${formattingTime}`);
+	}, 1000);
 	const handleChange = (value) => {
 		setInputValue(value);
 	};
@@ -22,6 +30,7 @@ export const ToDo = () => {
 		<>
 			<section className="Todo-container">
 				<h1>To_Do List</h1>
+				<h2>{dateTime}</h2>
 				<section className="Form-Container">
 					<form onSubmit={handleSubmit}>
 						<div>

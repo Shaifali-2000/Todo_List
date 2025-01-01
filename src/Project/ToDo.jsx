@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { MdCheck } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
-
+const Key = "key";
 export const ToDo = () => {
 	const [inputValue, setInputValue] = useState("");
-	const [task, setTask] = useState([]);
+	const [task, setTask] = useState(() => {
+		const rawData = localStorage.getItem(Key);
+		if (!rawData) return [];
+		return JSON.parse(rawData);
+	});
 	const [dateTime, setDateTime] = useState("");
 	setInterval(() => {
 		const now = new Date();
@@ -26,6 +30,8 @@ export const ToDo = () => {
 
 		setInputValue("");
 	};
+	//ADD TODO DATA ON LOCAL STORAGE
+	localStorage.setItem(Key, JSON.stringify(task));
 	//TODO HANDLEDELETE FUNCTION
 	const handleDelete = (value) => {
 		console.log(task);
